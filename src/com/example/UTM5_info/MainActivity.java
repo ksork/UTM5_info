@@ -150,8 +150,10 @@ public class MainActivity extends Activity {
     // Кнопка "Сменить тариф"
     public void onBtnChangeTariffClick(View v) {
         if (Checker.cabAvailable(CONTEXT)) {
-            Intent intent = new Intent(this, TariffsActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_TARIFFS);
+            if (user.isLoginOk()){
+                Intent intent = new Intent(this, TariffsActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_TARIFFS);
+            }
         }
     }
 
