@@ -7,7 +7,7 @@ import android.content.DialogInterface;
 /**
  * Сообщение с одной кнопкой "ОК"
  * пример:
- * Dialog.showMessage(ActivityClass.this, String title, String message)
+ * Dialog.showMessage(context, String title, String message)
  */
 public class Dialog {
 
@@ -15,7 +15,7 @@ public class Dialog {
         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
         alertDialog.setTitle(title);
         alertDialog.setMessage(message);
-        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
 
             }

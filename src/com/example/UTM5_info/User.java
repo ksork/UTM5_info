@@ -1,6 +1,5 @@
 package com.example.UTM5_info;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 import org.jsoup.Connection;
@@ -25,7 +24,7 @@ public class User {
     private String userLogin;
     private String userPassword;
     private Document mainHtml;
-    private boolean syncInProgress = false;
+    //private boolean syncInProgress = false;
 
 
     // Конструктор
@@ -38,10 +37,7 @@ public class User {
     // Проверка коректности логина/пароля
     public boolean isLoginOk() {
         String data = mainHtml.select("table").text();
-        if (data.length() != 0) {
-            return true;
-        }
-        return false;
+        return data.length() != 0;
     }
 
     // Лицевой счет
@@ -114,7 +110,7 @@ public class User {
     public ArrayList<HashMap<String, String>> getTariffList() {
         GetTariffList task = new GetTariffList();
         task.execute();
-        ArrayList tariffList = new ArrayList();
+        ArrayList<HashMap<String, String>> tariffList = new ArrayList<HashMap<String, String>>();
         try {
             Document tariffHtml = task.get();
             Elements tariffLabels = tariffHtml.select("label");
@@ -150,17 +146,6 @@ public class User {
         task.execute(nextTariffId);
     }
 
-    // Ожидание получения данных с сайта
-    private void waitIfSync() {
-        while (syncInProgress) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     // Парсер таблиц
     private String grabTable(Document html, int row, int column) {
         Element rowData = html.select("tr").get(row);
@@ -180,10 +165,8 @@ public class User {
                         .data("bootstrap[password]", userPassword)
                         .post();
             } catch (IOException e) {
-                syncInProgress = false;
                 return null;
             }
-            syncInProgress = false;
             return html;
         }
     }
@@ -234,8 +217,7 @@ public class User {
                         .method(Connection.Method.POST).execute();
                 Map<String, String> sessionId = res.cookies();
                 // Переход на страничку смены тарифа
-                Document doc = Jsoup.connect(CAB_URL + "/user/change-tariff/").cookies(sessionId).get();
-                return doc;
+                return Jsoup.connect(CAB_URL + "/user/change-tariff/").cookies(sessionId).get();
             } catch (IOException e) {
                 return null;
             }

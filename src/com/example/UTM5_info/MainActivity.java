@@ -1,17 +1,13 @@
 package com.example.UTM5_info;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 
 /**
  * Created by k on 29.07.14.
@@ -97,7 +93,7 @@ public class MainActivity extends Activity {
     }
 
     // Выкл все кнопки
-    protected void disableButtons(){
+    protected void disableButtons() {
         btnSettings.setEnabled(false);
         btnAddBlock.setEnabled(false);
         btnAddCredit.setEnabled(false);
@@ -105,7 +101,7 @@ public class MainActivity extends Activity {
     }
 
     // Вкл все кнопки
-    protected void enableButtons(){
+    protected void enableButtons() {
         btnSettings.setEnabled(true);
         btnAddBlock.setEnabled(true);
         btnAddCredit.setEnabled(true);
@@ -113,8 +109,8 @@ public class MainActivity extends Activity {
     }
 
     // Получаем данные с сайта, выводим на экран
-    protected void refreshData(){
-        if (Checker.cabUnavailable(context)){ //нет связи
+    protected void refreshData() {
+        if (Checker.cabUnavailable(context)) { //нет связи
             tvLogin.setText(userLogin);
             tvAccountId.setText("-----");
             tvCurrentTariff.setText("-----");
@@ -124,14 +120,14 @@ public class MainActivity extends Activity {
             return;
         }
         user = new User(userLogin, userPassword);
-        if(!user.isLoginOk()){              //связь есть, но логин/пароль не верны
+        if (!user.isLoginOk()) {              //связь есть, но логин/пароль не верны
             tvLogin.setText(userLogin);
             tvAccountId.setText("-----");
             tvCurrentTariff.setText("-----");
             tvBalance.setText("0");
             tvDaysLeft.setText("0");
             tvDayEnding.setText("дней");
-        }else {                             //все нормально
+        } else {                             //все нормально
             tvLogin.setText(userLogin);
             tvAccountId.setText(user.getAccountId());
             tvCurrentTariff.setText(user.getCurrentTariffName());
@@ -153,14 +149,14 @@ public class MainActivity extends Activity {
 
     // Кнопка "Сменить тариф"
     public void onClickBtnChangeTariff(View v) {
-        if(Checker.cabAvailable(context)){
+        if (Checker.cabAvailable(context)) {
             Intent intent = new Intent(this, TariffsActivity.class);
             startActivityForResult(intent, REQUEST_CODE_TARIFFS);
         }
     }
 
     // Кнопка "блокировка счёта"
-    public void onClickBtnAddBlock(View v){
+    public void onClickBtnAddBlock(View v) {
         Dialog.showMessage(context, "Блокировка", "До этого не дошли руки");
     }
 
@@ -168,7 +164,7 @@ public class MainActivity extends Activity {
     public void onClickBtnAddCredit(View v) {
         disableButtons();
         if (Checker.cabAvailable(context)) {
-            user = new User (userLogin, userPassword);
+            user = new User(userLogin, userPassword);
             if (Integer.parseInt(user.getBalance()) > 0) {
                 Dialog.showMessage(context, "Кредит",
                         "Услуга доступна при отрицательном балансе");
