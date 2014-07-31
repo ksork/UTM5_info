@@ -26,7 +26,6 @@ public class User {
     private String userPassword;
     private Document mainHtml;
     private boolean syncInProgress = false;
-    int x;
 
     // Конструктор
     public User(String userLogin, String userPassword){
