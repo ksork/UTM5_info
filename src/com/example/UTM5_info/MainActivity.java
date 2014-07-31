@@ -20,9 +20,9 @@ public class MainActivity extends Activity {
     private final int REQUEST_CODE_TARIFFS = 2;
     private final int REQUEST_CODE_ADD_BLOCK = 3;
     private final int REQUEST_CODE_GOTO_SITE = 4;
+    private final Context CONTEXT = MainActivity.this;
     private String userLogin;
     private String userPassword;
-    Context context = MainActivity.this;
 
     private TextView tvLogin;
     private TextView tvAccountId;
@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
                     saveAccountData();
                     refreshData();
                     break;
-                case REQUEST_CODE_TARIFFS: // Возврат из жопы
+                case REQUEST_CODE_TARIFFS:
                     break;
                 case REQUEST_CODE_ADD_BLOCK:
                     break;
@@ -110,7 +110,7 @@ public class MainActivity extends Activity {
 
     // Получаем данные с сайта, выводим на экран
     protected void refreshData() {
-        if (Checker.cabUnavailable(context)) { //нет связи
+        if (Checker.cabUnavailable(CONTEXT)) { //нет связи
             tvLogin.setText(userLogin);
             tvAccountId.setText("-----");
             tvCurrentTariff.setText("-----");
@@ -139,7 +139,7 @@ public class MainActivity extends Activity {
 
     // Кнопка настройки
     public void onClickBtnSettings(View v) {
-        if (Checker.cabAvailable(context)) {
+        if (Checker.cabAvailable(CONTEXT)) {
             Intent intent = new Intent(this, SettingsActivity.class);
             intent.putExtra("userLogin", userLogin);
             intent.putExtra("userPassword", userPassword);
@@ -149,7 +149,7 @@ public class MainActivity extends Activity {
 
     // Кнопка "Сменить тариф"
     public void onClickBtnChangeTariff(View v) {
-        if (Checker.cabAvailable(context)) {
+        if (Checker.cabAvailable(CONTEXT)) {
             Intent intent = new Intent(this, TariffsActivity.class);
             startActivityForResult(intent, REQUEST_CODE_TARIFFS);
         }
@@ -157,28 +157,28 @@ public class MainActivity extends Activity {
 
     // Кнопка "блокировка счёта"
     public void onClickBtnAddBlock(View v) {
-        Dialog.showMessage(context, "Блокировка", "До этого не дошли руки");
+        Dialog.showMessage(CONTEXT, "Блокировка", "До этого не дошли руки");
     }
 
     // Кнопка "Взять кредит"
     public void onClickBtnAddCredit(View v) {
         disableButtons();
-        if (Checker.cabAvailable(context)) {
+        if (Checker.cabAvailable(CONTEXT)) {
             user = new User(userLogin, userPassword);
             if (Integer.parseInt(user.getBalance()) > 0) {
-                Dialog.showMessage(context, "Кредит",
+                Dialog.showMessage(CONTEXT, "Кредит",
                         "Услуга доступна при отрицательном балансе");
                 enableButtons();
                 return;
             }
             String resultOfCredit = user.addCredit();
             if (resultOfCredit == null) {
-                Dialog.showMessage(context, "Кредит",
+                Dialog.showMessage(CONTEXT, "Кредит",
                         "Кредит установлен, срок действия 5 дней");
                 enableButtons();
                 return;
             }
-            Dialog.showMessage(context, "Кредит",
+            Dialog.showMessage(CONTEXT, "Кредит",
                     "Вы использовали кредит " + resultOfCredit + ", услуга доступна раз в 30 дней");
         }
         enableButtons();
