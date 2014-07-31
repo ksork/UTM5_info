@@ -17,7 +17,7 @@
             android:layout_marginBottom="30dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:onClick="onClickBtnSettings"/>
+            android:onClick="onBtnSettingsClick"/>
 
     <ImageView
             android:layout_width="wrap_content"
@@ -213,7 +213,7 @@
                 style="@style/button"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:onClick="onClickBtnAddCredit"/>
+                android:onClick="onBtnAddCreditClick"/>
 
         <Button
                 android:layout_width="match_parent"
@@ -224,7 +224,7 @@
                 android:paddingTop="10dp"
                 android:layout_above="@+id/btnSettings"
                 android:layout_centerHorizontal="true"
-                android:onClick="onClickBtnChangeTariff"
+                android:onClick="onBtnChangeTariffClick"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"/>
 
@@ -237,7 +237,7 @@
                 android:layout_alignParentRight="true"
                 style="@style/button"
                 android:layout_marginRight="10dp"
-                android:layout_weight="1" android:onClick="onClickBtnAddBlock"/>
+                android:layout_weight="1" android:onClick="onBtnAddBlockClick"/>
 
     </LinearLayout>
 

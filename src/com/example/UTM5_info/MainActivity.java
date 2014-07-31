@@ -138,7 +138,7 @@ public class MainActivity extends Activity {
     }
 
     // Кнопка настройки
-    public void onClickBtnSettings(View v) {
+    public void onBtnSettingsClick(View v) {
         if (Checker.cabAvailable(CONTEXT)) {
             Intent intent = new Intent(this, SettingsActivity.class);
             intent.putExtra("userLogin", userLogin);
@@ -148,7 +148,7 @@ public class MainActivity extends Activity {
     }
 
     // Кнопка "Сменить тариф"
-    public void onClickBtnChangeTariff(View v) {
+    public void onBtnChangeTariffClick(View v) {
         if (Checker.cabAvailable(CONTEXT)) {
             Intent intent = new Intent(this, TariffsActivity.class);
             startActivityForResult(intent, REQUEST_CODE_TARIFFS);
@@ -156,12 +156,12 @@ public class MainActivity extends Activity {
     }
 
     // Кнопка "блокировка счёта"
-    public void onClickBtnAddBlock(View v) {
+    public void onBtnAddBlockClick(View v) {
         Dialog.showMessage(CONTEXT, "Блокировка", "До этого не дошли руки");
     }
 
     // Кнопка "Взять кредит"
-    public void onClickBtnAddCredit(View v) {
+    public void onBtnAddCreditClick(View v) {
         disableButtons();
         if (Checker.cabAvailable(CONTEXT)) {
             user = new User(userLogin, userPassword);

@@ -36,7 +36,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:id="@+id/btnOk"
-                android:onClick="onClickBtnChangeTariff" android:text="Изменить\nтариф"
+                android:onClick="onBtnChangeTariffClick" android:text="Изменить\nтариф"
                 android:background="@drawable/button_background"/>
     </LinearLayout>
 

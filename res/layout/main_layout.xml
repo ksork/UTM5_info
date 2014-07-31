@@ -15,7 +15,7 @@
             android:layout_centerHorizontal="true"
             android:background="@drawable/button_background"
             android:layout_margin="5dp"
-            android:onClick="onClickBtnSettings"/>
+            android:onClick="onBtnSettingsClick"/>
 
     <LinearLayout
             android:orientation="horizontal"
@@ -37,7 +37,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_background"
                 android:layout_marginRight="5dp"
-                android:onClick="onClickBtnAddCredit"/>
+                android:onClick="onBtnAddCreditClick"/>
 
         <Button
                 android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                 android:id="@+id/btnChangeTariff"
                 android:layout_weight="1"
                 android:background="@drawable/button_background"
-                android:layout_marginRight="5dp" android:onClick="onClickBtnChangeTariff"/>
+                android:layout_marginRight="5dp" android:onClick="onBtnChangeTariffClick"/>
 
         <Button
                 android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                 android:id="@+id/btnAddBlock"
                 android:layout_weight="1"
                 android:background="@drawable/button_background"
-                android:layout_marginRight="5dp" android:onClick="onClickBtnAddBlock"/>
+                android:layout_marginRight="5dp" android:onClick="onBtnAddBlockClick"/>
     </LinearLayout>
 
     <LinearLayout

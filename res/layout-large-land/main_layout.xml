@@ -85,26 +85,26 @@
             android:text="Настройки"
             android:id="@+id/btnSettings" android:layout_alignParentBottom="true" android:layout_alignParentRight="true"
             android:layout_marginRight="20dp" android:layout_marginBottom="20dp" style="@style/button"
-            android:onClick="onClickBtnSettings"/>
+            android:onClick="onBtnSettingsClick"/>
     <Button
             android:layout_width="188dp"
             android:layout_height="188dp"
             android:text="Блокировка\nсчета"
             android:id="@+id/btnAddBlock" android:layout_alignBottom="@+id/btnSettings" android:layout_toLeftOf="@+id/btnSettings"
-            android:layout_marginRight="10dp" style="@style/button" android:onClick="onClickBtnAddBlock"/>
+            android:layout_marginRight="10dp" style="@style/button" android:onClick="onBtnAddBlockClick"/>
     <Button
             android:layout_width="188dp"
             android:layout_height="188dp"
             android:text="Сменить\nтариф"
             android:id="@+id/btnChangeTariff" android:layout_above="@+id/btnSettings" android:layout_alignRight="@+id/btnSettings"
-            android:layout_marginBottom="10dp" style="@style/button" android:onClick="onClickBtnChangeTariff"/>
+            android:layout_marginBottom="10dp" style="@style/button" android:onClick="onBtnChangeTariffClick"/>
     <Button
             android:layout_width="188dp"
             android:layout_height="188dp"
             android:text="Взять\nкредит"
             android:id="@+id/btnAddCredit" android:layout_alignTop="@+id/btnChangeTariff" android:layout_alignLeft="@+id/btnAddBlock"
             style="@style/button"
-            android:onClick="onClickBtnAddCredit"/>
+            android:onClick="onBtnAddCreditClick"/>
 
     <TextView
             android:layout_width="wrap_content"

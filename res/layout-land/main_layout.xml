@@ -16,7 +16,7 @@
             android:background="@drawable/button_background"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
-            android:onClick="onClickBtnSettings"/>
+            android:onClick="onBtnSettingsClick"/>
 
     <Button
             android:layout_width="100dp"
@@ -26,7 +26,7 @@
             android:background="@drawable/button_background"
             android:layout_above="@+id/btnSettings"
             android:layout_alignLeft="@+id/btnSettings"
-            android:layout_marginBottom="5dp" android:onClick="onClickBtnChangeTariff"/>
+            android:layout_marginBottom="5dp" android:onClick="onBtnChangeTariffClick"/>
 
     <Button
             android:layout_width="100dp"
@@ -36,7 +36,7 @@
             android:layout_below="@+id/btnChangeTariff"
             android:layout_toLeftOf="@+id/btnSettings"
             android:background="@drawable/button_background"
-            android:layout_marginRight="5dp" android:onClick="onClickBtnAddBlock"/>
+            android:layout_marginRight="5dp" android:onClick="onBtnAddBlockClick"/>
 
     <Button
             android:layout_width="100dp"
@@ -46,7 +46,7 @@
             android:background="@drawable/button_background"
             android:layout_alignTop="@+id/btnChangeTariff"
             android:layout_alignLeft="@+id/btnAddBlock"
-            android:onClick="onClickBtnAddCredit"/>
+            android:onClick="onBtnAddCreditClick"/>
 
     <TableLayout
             android:layout_width="fill_parent"
