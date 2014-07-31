@@ -26,13 +26,7 @@ public class MainActivity extends Activity {
     private final int REQUEST_CODE_GOTO_SITE = 4;
     private String userLogin;
     private String userPassword;
-    Context context;
-
-    private String userAccountId;        // Лицевой счет
-    private String userCurrentTariff;   // Текущий тариф
-    private String userBalance;         // Баланс
-    private String userDaysLeft;        // Остаток дней
-
+    Context context = MainActivity.this;
 
     private TextView tvLogin;
     private TextView tvAccountId;
@@ -60,8 +54,6 @@ public class MainActivity extends Activity {
         btnChangeTariff = (Button) findViewById(R.id.btnChangeTariff);
         btnAddBlock = (Button) findViewById(R.id.btnAddBlock);
         btnSettings = (Button) findViewById(R.id.btnSettings);
-
-        context = getApplicationContext();
 
         loadAccountData();
         refreshData();
@@ -120,23 +112,6 @@ public class MainActivity extends Activity {
         btnChangeTariff.setEnabled(true);
     }
 
-    // Сообщение
-    public void showDialog(String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Упс!")
-                .setMessage(message)
-                .setCancelable(false)
-                .setNegativeButton("ОК",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                                enableButtons();
-                            }
-                        });
-        AlertDialog alert = builder.create();
-        alert.show();
-    }
-
     // Получаем данные с сайта, выводим на экран
     protected void refreshData(){
         if (Checker.cabUnavailable(context)){ //нет связи
@@ -186,7 +161,7 @@ public class MainActivity extends Activity {
 
     // Кнопка "блокировка счёта"
     public void onClickBtnAddBlock(View v){
-        showDialog("До этого не дошли руки");
+        Dialog.showMessage(context, "Блокировка", "До этого не дошли руки");
     }
 
     // Кнопка "Взять кредит"
@@ -195,15 +170,20 @@ public class MainActivity extends Activity {
         if (Checker.cabAvailable(context)) {
             user = new User (userLogin, userPassword);
             if (Integer.parseInt(user.getBalance()) > 0) {
-                showDialog("Кредит доступен при отрицательном балансе");
+                Dialog.showMessage(context, "Кредит",
+                        "Услуга доступна при отрицательном балансе");
+                enableButtons();
                 return;
             }
             String resultOfCredit = user.addCredit();
             if (resultOfCredit == null) {
-                showDialog("Кредит установлен");
+                Dialog.showMessage(context, "Кредит",
+                        "Кредит установлен, срок действия 5 дней");
+                enableButtons();
                 return;
             }
-            showDialog("Вы использовали кредит " + resultOfCredit + ", услуга доступна раз в 30 дней");
+            Dialog.showMessage(context, "Кредит",
+                    "Вы использовали кредит " + resultOfCredit + ", услуга доступна раз в 30 дней");
         }
         enableButtons();
     }

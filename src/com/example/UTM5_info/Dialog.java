@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 /**
- * Created by k on 30.07.14.
+ * Сообщение с одной кнопкой "ОК"
+ * пример:
+ * Dialog.showMessage(ActivityClass.this, String title, String message)
  */
 public class Dialog {
 
