@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/backh">
+
+    <Button
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="Настройки"
+            android:id="@+id/btnSettings"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/button_background"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:onClick="onClickBtnSettings"/>
+
+    <Button
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="Сменить\nтариф"
+            android:id="@+id/btnChangeTariff"
+            android:background="@drawable/button_background"
+            android:layout_above="@+id/btnSettings"
+            android:layout_alignLeft="@+id/btnSettings"
+            android:layout_marginBottom="5dp" android:onClick="onClickBtnChangeTariff"/>
+
+    <Button
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="Блокировка\nсчета"
+            android:id="@+id/btnAddBlock"
+            android:layout_below="@+id/btnChangeTariff"
+            android:layout_toLeftOf="@+id/btnSettings"
+            android:background="@drawable/button_background"
+            android:layout_marginRight="5dp" android:onClick="onClickBtnAddBlock"/>
+
+    <Button
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="Взять\nкредит"
+            android:id="@+id/btnAddCredit"
+            android:background="@drawable/button_background"
+            android:layout_alignTop="@+id/btnChangeTariff"
+            android:layout_alignLeft="@+id/btnAddBlock"
+            android:onClick="onClickBtnAddCredit"/>
+
+    <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_alignRight="@+id/linearLayout"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/tableLayout"
+            android:layout_marginTop="10dp">
+
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Логин"
+                    android:id="@+id/textView2"
+                    style="@style/text1"
+                    android:layout_weight="1"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="-----"
+                    android:id="@+id/tvLogin"
+                    style="@style/text1"
+                    android:layout_weight="1"/>
+        </TableRow>
+
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Лицевой счет"
+                    android:id="@+id/textView5"
+                    style="@style/text1"
+                    android:layout_weight="1"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="-----"
+                    android:id="@+id/tvAccountId"
+                    style="@style/text1"
+                    android:layout_weight="1"/>
+
+        </TableRow>
+
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Текущий тариф"
+                    android:id="@+id/textView3"
+                    android:layout_weight="1"
+                    style="@style/text1"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="-----"
+                    android:id="@+id/tvCurrentTariff"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/tvNextTariff"
+                    android:layout_weight="1"
+                    style="@style/text1"
+                    />
+
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignBottom="@+id/btnAddBlock"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/linearLayout"
+            android:layout_toLeftOf="@+id/btnAddBlock"
+            android:layout_marginRight="20dp"
+            android:layout_below="@+id/tableLayout">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Баланс"
+                android:id="@+id/textView"
+                style="@style/text3"
+                android:layout_marginLeft="20dp"/>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:id="@+id/tvBalance"
+                    style="@style/text4"
+                    android:layout_weight="1"
+                    android:gravity="right"/>
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="р."
+                    android:id="@+id/textWiew2"
+                    style="@style/text3"
+                    android:layout_weight="1"/>
+        </LinearLayout>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="-----"
+                android:id="@+id/tvDaysLeft"
+                style="@style/text5"
+                android:gravity="right"
+                android:layout_marginTop="-10dp"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="дней"
+                android:id="@+id/tvDayEnding"
+                style="@style/text3"
+                android:gravity="right"
+                android:layout_marginTop="-10dp"/>
+
+    </LinearLayout>
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/inettel_s"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:onClick="gotoSite"/>
+
+</RelativeLayout>

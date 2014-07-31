@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/backh">
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView" android:background="@drawable/inettel" android:layout_alignParentLeft="true"
+            android:layout_marginLeft="0dp" android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
+    <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lvTariffs"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp" android:layout_marginRight="10dp"
+            android:layout_alignParentLeft="false"
+            android:layout_above="@+id/linearLayout" android:layout_below="@+id/imageView"
+            android:choiceMode="singleChoice" android:layout_marginBottom="5dp"/>
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" android:layout_alignParentLeft="false" android:layout_marginLeft="10dp"
+            android:layout_alignParentTop="false"
+            android:layout_marginRight="10dp" android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp" android:id="@+id/linearLayout">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/tariff_info"
+                android:id="@+id/textView" android:layout_weight="1" style="@style/text2L"/>
+        <Button
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:id="@+id/btnOk"
+                android:onClick="onClickBtnChangeTariff" android:text="Изменить\nтариф"
+                android:background="@drawable/button_background"/>
+    </LinearLayout>
+
+</RelativeLayout>
