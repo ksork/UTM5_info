@@ -13,20 +13,18 @@
             android:id="@+id/btnSettings"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:background="@drawable/button_background"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
-            android:onClick="onBtnSettingsClick"/>
+            android:onClick="onBtnSettingsClick" style="@style/button"/>
 
     <Button
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:text="Сменить\nтариф"
             android:id="@+id/btnChangeTariff"
-            android:background="@drawable/button_background"
             android:layout_above="@+id/btnSettings"
             android:layout_alignLeft="@+id/btnSettings"
-            android:layout_marginBottom="5dp" android:onClick="onBtnChangeTariffClick"/>
+            android:layout_marginBottom="5dp" android:onClick="onBtnChangeTariffClick" style="@style/button"/>
 
     <Button
             android:layout_width="100dp"
@@ -35,18 +33,16 @@
             android:id="@+id/btnAddBlock"
             android:layout_below="@+id/btnChangeTariff"
             android:layout_toLeftOf="@+id/btnSettings"
-            android:background="@drawable/button_background"
-            android:layout_marginRight="5dp" android:onClick="onBtnAddBlockClick"/>
+            android:layout_marginRight="5dp" android:onClick="onBtnAddBlockClick" style="@style/button"/>
 
     <Button
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:text="Взять\nкредит"
             android:id="@+id/btnAddCredit"
-            android:background="@drawable/button_background"
             android:layout_alignTop="@+id/btnChangeTariff"
             android:layout_alignLeft="@+id/btnAddBlock"
-            android:onClick="onBtnAddCreditClick"/>
+            android:onClick="onBtnAddCreditClick" style="@style/button"/>
 
     <TableLayout
             android:layout_width="fill_parent"
