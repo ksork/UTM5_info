@@ -151,16 +151,25 @@ public class MainActivity extends Activity {
 
     // Кнопка "Сменить тариф"
     public void onBtnChangeTariffClick(View v) {
-        if (Checker.cabUnavailable(CONTEXT)) {return;}
-        if (!user.isLoginOk()){return;}
-        String currentTariff = user.getCurrentTariffName();
-        String nextTariff = user.getNextTariffName();
-        if (currentTariff.equals(nextTariff)){
-            Intent intent = new Intent(this, TariffsActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_TARIFFS);
+        disableButtons();
+        if (Checker.cabUnavailable(CONTEXT)) {
+            enableButtons();
             return;
         }
-        Dialog.showMessage(CONTEXT, "Смена тарифа", "Вы уже заказали смену тарифного плана на "+nextTariff);
+        if (!user.isLoginOk()) {
+            enableButtons();
+            return;
+        }
+        String currentTariff = user.getCurrentTariffName();
+        String nextTariff = user.getNextTariffName();
+        if (currentTariff.equals(nextTariff)) {
+            Intent intent = new Intent(this, TariffsActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_TARIFFS);
+            enableButtons();
+            return;
+        }
+        Dialog.showMessage(CONTEXT, "Смена тарифа", "Вы уже заказали смену тарифного плана на " + nextTariff);
+        enableButtons();
     }
 
     // Кнопка "блокировка счёта"
@@ -171,24 +180,30 @@ public class MainActivity extends Activity {
     // Кнопка "Взять кредит"
     public void onBtnAddCreditClick(View v) {
         disableButtons();
-        if (Checker.cabAvailable(CONTEXT)) {
-            user = new User(userLogin, userPassword);
-            if (Integer.parseInt(user.getBalance()) > 0) {
-                Dialog.showMessage(CONTEXT, "Кредит",
-                        "Услуга доступна при отрицательном балансе");
-                enableButtons();
-                return;
-            }
-            String resultOfCredit = user.addCredit();
-            if (resultOfCredit == null) {
-                Dialog.showMessage(CONTEXT, "Кредит",
-                        "Кредит установлен, срок действия 5 дней");
-                enableButtons();
-                return;
-            }
-            Dialog.showMessage(CONTEXT, "Кредит",
-                    "Вы использовали кредит " + resultOfCredit + ", услуга доступна раз в 30 дней");
+        if (Checker.cabUnavailable(CONTEXT)) {
+            enableButtons();
+            return;
         }
+        user = new User(userLogin, userPassword);
+        if (!user.isLoginOk()) {
+            enableButtons();
+            return;
+        }
+        if (Integer.parseInt(user.getBalance()) > 0) {
+            Dialog.showMessage(CONTEXT, "Кредит",
+                    "Услуга доступна при отрицательном балансе");
+            enableButtons();
+            return;
+        }
+        String resultOfCredit = user.addCredit();
+        if (resultOfCredit == null) {
+            Dialog.showMessage(CONTEXT, "Кредит",
+                    "Кредит установлен, срок действия 5 дней");
+            enableButtons();
+            return;
+        }
+        Dialog.showMessage(CONTEXT, "Кредит",
+                "Вы использовали кредит " + resultOfCredit + ", услуга доступна раз в 30 дней");
         enableButtons();
     }
 }
