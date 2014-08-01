@@ -38,8 +38,8 @@ public class TariffsActivity extends Activity{
 
     // Выводим список тарифов на экран
     private void showTariffs(){
-        String[] from = {"tariffName", "tariffDescription", "tariffPrice", "tariffEnable"};
-        int[] to = {R.id.tvTariffName, R.id.tvTariffDescription, R.id.tvTariffPrice, R.id.imgGalka};
+        String[] from = {"tariffName", "tariffDescription", "tariffEnable"};
+        int[] to = {R.id.tvTariffName, R.id.tvTariffDescription, R.id.imgGalka};
         SimpleAdapter adapter = new SimpleAdapter(this, tariffData, R.layout.tariffs_list_item, from, to);
         lvTariffs.setAdapter(adapter);
         lvTariffs.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -52,12 +52,13 @@ public class TariffsActivity extends Activity{
         return (balance < tariffPrice);
     }
 
-    public void onClickBtnChangeTariff(View v){
+    public void onBtnOkClick(View v){
         // Проверяем соединение с кабинетом
         if (Checker.cabUnavailable(context)){
             return;
         }
         int tariffSelected = lvTariffs.getCheckedItemPosition();
+        if (tariffSelected == -1){return;}
         // Проверяем баланс
         Log.d(LOG_TAG, "balance: " + isBalanceLow(tariffSelected));
         if (isBalanceLow(tariffSelected)){
@@ -66,6 +67,7 @@ public class TariffsActivity extends Activity{
             return;
         }
         MainActivity.user.changeTariff(TARIFFS_ID[tariffSelected]);
+        setResult(RESULT_OK);
         finish();
     }
 }

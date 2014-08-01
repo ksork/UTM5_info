@@ -67,6 +67,8 @@ public class MainActivity extends Activity {
                     refreshData();
                     break;
                 case REQUEST_CODE_TARIFFS:
+                    user = new User(userLogin, userPassword);
+                    refreshData();
                     break;
                 case REQUEST_CODE_ADD_BLOCK:
                     break;
@@ -149,12 +151,16 @@ public class MainActivity extends Activity {
 
     // Кнопка "Сменить тариф"
     public void onBtnChangeTariffClick(View v) {
-        if (Checker.cabAvailable(CONTEXT)) {
-            if (user.isLoginOk()){
-                Intent intent = new Intent(this, TariffsActivity.class);
-                startActivityForResult(intent, REQUEST_CODE_TARIFFS);
-            }
+        if (Checker.cabUnavailable(CONTEXT)) {return;}
+        if (!user.isLoginOk()){return;}
+        String currentTariff = user.getCurrentTariffName();
+        String nextTariff = user.getNextTariffName();
+        if (currentTariff.equals(nextTariff)){
+            Intent intent = new Intent(this, TariffsActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_TARIFFS);
+            return;
         }
+        Dialog.showMessage(CONTEXT, "Смена тарифа", "Вы уже заказали смену тарифного плана на "+nextTariff);
     }
 
     // Кнопка "блокировка счёта"

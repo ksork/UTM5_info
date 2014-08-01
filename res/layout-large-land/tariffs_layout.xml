@@ -18,7 +18,7 @@
             android:layout_weight="1"
             android:layout_marginLeft="10dp" android:layout_marginRight="10dp"
             android:layout_alignParentLeft="false"
-            android:layout_above="@+id/linearLayout" android:layout_below="@+id/imageView"
+            android:layout_below="@+id/imageView"
             android:choiceMode="singleChoice" android:layout_marginBottom="5dp"/>
 
     <LinearLayout
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content" android:layout_alignParentLeft="false" android:layout_marginLeft="10dp"
             android:layout_alignParentTop="false"
             android:layout_marginRight="10dp" android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp" android:id="@+id/linearLayout">
+            android:layout_marginBottom="10dp" android:id="@+id/linearLayout" android:layout_below="@+id/lvTariffs">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -35,9 +35,9 @@
                 android:id="@+id/textView" android:layout_weight="1" style="@style/text2L"/>
         <Button
                 android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_height="match_parent"
                 android:id="@+id/btnOk"
-                android:onClick="onBtnChangeTariffClick" android:text="Изменить\nтариф"
+                android:onClick="onBtnOkClick" android:text="Изменить\nтариф"
                 android:background="@drawable/button_background"/>
     </LinearLayout>
 

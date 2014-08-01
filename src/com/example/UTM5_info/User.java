@@ -119,11 +119,11 @@ public class User {
             for (int i = 0; i < tariffLabels.size() - 1; i++) {
                 HashMap<String, String> tariff = new HashMap<String, String>();
                 String tariffName = tariffLabels.get(i).select("span").text();
-                String tariffDescription = tariffLabels.get(i).text().split(" ", 2)[1];
+                String tariffDescription = tariffLabels.get(i).text().split(" ", 4)[3];
+                Log.d(LOG_TAG, tariffLabels.get(i).text());
                 String tariffPrice = tariffData.get(i + 1).select("td").get(3).text();
                 tariff.put("tariffName", tariffName);
-                tariff.put("tariffDescription", tariffDescription);
-                tariff.put("tariffPrice", tariffPrice);
+                tariff.put("tariffDescription", tariffPrice+" "+tariffDescription);
 
                 if (tariffName.equals(getCurrentTariffName())) {
                     tariff.put("tariffEnable", IMG_CHECKED);

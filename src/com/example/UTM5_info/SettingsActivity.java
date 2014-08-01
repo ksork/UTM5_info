@@ -32,7 +32,7 @@ public class SettingsActivity extends Activity {
         edPassword.setText(userPassword);
     }
 
-    public void onClickBtnOk(View view) {
+    public void onBtnSaveSettingsClick(View view) {
         userLogin = edLogin.getText().toString();
         userPassword = edPassword.getText().toString();
         MainActivity.user = new User(userLogin, userPassword);

@@ -41,6 +41,6 @@
             android:text="@android:string/ok"
             android:id="@+id/button"
             android:layout_gravity="center_horizontal"
-            android:onClick="onBtnChangeTariffClick"
+            android:onClick="onBtnSaveSettingsClick"
             android:layout_marginTop="20dp"/>
 </LinearLayout>
