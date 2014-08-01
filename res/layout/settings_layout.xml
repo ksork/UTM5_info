@@ -46,5 +46,5 @@
             android:text="@android:string/ok"
             android:id="@+id/button"
             android:layout_gravity="center_horizontal"
-            android:onClick="onClickBtnOk"/>
+            android:onClick="onBtnSaveSettingsClick"/>
 </LinearLayout>
