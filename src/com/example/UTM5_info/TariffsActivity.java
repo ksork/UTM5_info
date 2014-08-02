@@ -54,7 +54,7 @@ public class TariffsActivity extends Activity{
 
     public void onBtnOkClick(View v){
         // Проверяем соединение с кабинетом
-        if (Checker.cabUnavailable(context)){
+        if (Checker.cabUnAvailable(context)){
             return;
         }
         int tariffSelected = lvTariffs.getCheckedItemPosition();

@@ -2,7 +2,6 @@ package com.example.UTM5_info;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 import org.jsoup.Jsoup;
 import java.io.IOException;
@@ -10,15 +9,14 @@ import java.util.concurrent.ExecutionException;
 
 public class Checker {
 
-    public static boolean cabAvailable(Context context){return !cabUnavailable(context);}
+    public static boolean cabAvailable(Context context){return !cabUnAvailable(context);}
 
-    public static boolean cabUnavailable(Context context){
+    public static boolean cabUnAvailable(Context context){
         CabChecker checker = new CabChecker();
         checker.execute();
         try {
-            if(checker.get()){
-                return false;
-            }
+            if(checker.get()) return false;
+
         } catch (InterruptedException e) {
         } catch (ExecutionException e) {
         }

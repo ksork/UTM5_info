@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import static com.example.UTM5_info.Checker.cabUnAvailable;
+import static com.example.UTM5_info.Dialog.showMessage;
+
 /**
  * Created by k on 29.07.14.
  */
@@ -112,7 +115,7 @@ public class MainActivity extends Activity {
 
     // Получаем данные с сайта, выводим на экран
     protected void refreshData() {
-        if (Checker.cabUnavailable(CONTEXT)) { //нет связи
+        if (cabUnAvailable(CONTEXT)) { //нет связи
             tvLogin.setText(userLogin);
             tvAccountId.setText("-----");
             tvCurrentTariff.setText("-----");
@@ -141,22 +144,17 @@ public class MainActivity extends Activity {
 
     // Кнопка настройки
     public void onBtnSettingsClick(View v) {
-        if (Checker.cabAvailable(CONTEXT)) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            intent.putExtra("userLogin", userLogin);
-            intent.putExtra("userPassword", userPassword);
-            startActivityForResult(intent, REQUEST_CODE_SETTINGS);
-        }
+        if (cabUnAvailable(CONTEXT)) return;
+        Intent intent = new Intent(this, SettingsActivity.class);
+        intent.putExtra("userLogin", userLogin);
+        intent.putExtra("userPassword", userPassword);
+        startActivityForResult(intent, REQUEST_CODE_SETTINGS);
     }
 
     // Кнопка "Сменить тариф"
     public void onBtnChangeTariffClick(View v) {
         disableButtons();
-        if (Checker.cabUnavailable(CONTEXT)) {
-            enableButtons();
-            return;
-        }
-        if (!user.isLoginOk()) {
+        if (Checker.cabUnAvailable(CONTEXT) || !user.isLoginOk()) {
             enableButtons();
             return;
         }
@@ -168,42 +166,34 @@ public class MainActivity extends Activity {
             enableButtons();
             return;
         }
-        Dialog.showMessage(CONTEXT, "Смена тарифа", "Вы уже заказали смену тарифного плана на " + nextTariff);
+        showMessage(CONTEXT, "Смена тарифа", "Вы уже заказали смену тарифного плана на " + nextTariff);
         enableButtons();
     }
 
     // Кнопка "блокировка счёта"
     public void onBtnAddBlockClick(View v) {
-        Dialog.showMessage(CONTEXT, "Блокировка", "До этого не дошли руки");
+        showMessage(CONTEXT, "Блокировка", "До этого не дошли руки");
     }
 
     // Кнопка "Взять кредит"
     public void onBtnAddCreditClick(View v) {
         disableButtons();
-        if (Checker.cabUnavailable(CONTEXT)) {
-            enableButtons();
-            return;
-        }
-        user = new User(userLogin, userPassword);
-        if (!user.isLoginOk()) {
+        if (Checker.cabUnAvailable(CONTEXT) || !user.isLoginOk()) {
             enableButtons();
             return;
         }
         if (Integer.parseInt(user.getBalance()) > 0) {
-            Dialog.showMessage(CONTEXT, "Кредит",
-                    "Услуга доступна при отрицательном балансе");
+            showMessage(CONTEXT, "Кредит", "Услуга доступна при отрицательном балансе");
             enableButtons();
             return;
         }
         String resultOfCredit = user.addCredit();
         if (resultOfCredit == null) {
-            Dialog.showMessage(CONTEXT, "Кредит",
-                    "Кредит установлен, срок действия 5 дней");
+            showMessage(CONTEXT, "Кредит", "Кредит установлен, срок действия 5 дней");
             enableButtons();
             return;
         }
-        Dialog.showMessage(CONTEXT, "Кредит",
-                "Вы использовали кредит " + resultOfCredit + ", услуга доступна раз в 30 дней");
+        showMessage(CONTEXT, "Кредит", "Вы использовали кредит " + resultOfCredit + ", услуга доступна раз в 30 дней");
         enableButtons();
     }
 }
