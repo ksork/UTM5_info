@@ -186,7 +186,6 @@ public class User {
                 Document doc = Jsoup.connect(CAB_URL + "/user/promise-payment/aid/" + getAccountId())
                         .cookies(sessionId).get();
                 if (doc.select("form").text().length() == 0) {
-                    Log.d(LOG_TAG, "Credit unavailable");
                     return grabTable(doc, 0, 1).split(" ")[0];
                 } else {
                     // Берём кредит

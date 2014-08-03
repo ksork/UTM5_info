@@ -10,9 +10,8 @@ public class Day {
         int inum = Integer.parseInt(num);
 
         int i = inum % 100;
-        if(i>10 && i<20 ){
-            ending = endings[2];
-        }else {
+        if(i>10 && i<20 ) ending = endings[2];
+        else {
             i = inum % 10;
             switch (i){
                 case 1:
