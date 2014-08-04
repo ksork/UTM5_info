@@ -34,11 +34,6 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="tvTariffPrice"
-                android:id="@+id/tvTariffPrice" style="@style/text2"/>
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="tvTariffDescription"
                 android:id="@+id/tvTariffDescription" style="@style/text2"/>
     </LinearLayout>

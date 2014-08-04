@@ -13,7 +13,7 @@
             android:id="@+id/btnSettings"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            style="@style/button"
+            style="@style/buttonL"
             android:layout_marginBottom="30dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -210,7 +210,7 @@
                 android:id="@+id/btnAddCredit"
                 android:layout_above="@+id/btnSettings"
                 android:layout_alignParentLeft="true"
-                style="@style/button"
+                style="@style/buttonL"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:onClick="onBtnAddCreditClick"/>
@@ -220,7 +220,7 @@
                 android:layout_height="188dp"
                 android:text="Сменить\nтариф"
                 android:id="@+id/btnChangeTariff"
-                style="@style/button"
+                style="@style/buttonL"
                 android:paddingTop="10dp"
                 android:layout_above="@+id/btnSettings"
                 android:layout_centerHorizontal="true"
@@ -235,7 +235,7 @@
                 android:id="@+id/btnAddBlock"
                 android:layout_above="@+id/btnSettings"
                 android:layout_alignParentRight="true"
-                style="@style/button"
+                style="@style/buttonL"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1" android:onClick="onBtnAddBlockClick"/>
 
