@@ -95,15 +95,7 @@ public class User {
 
     // Логинимся на сайт, получаем главную старничку кабинета
     public void refreshMainHtml() {
-        MainHtmlRefresher refresher = new MainHtmlRefresher();
-        refresher.execute();
-        try {
-            mainHtml = refresher.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        Net.getCookies(userLogin, userPassword);
     }
 
     // Список доступных тарифов

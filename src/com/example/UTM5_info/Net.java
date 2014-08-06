@@ -14,12 +14,12 @@ import java.util.concurrent.ExecutionException;
  * Created by k on 06.08.14.
  */
 public class Net {
-    private final String CAB_URL = "http://cab.inettel.ru/";
-    private final String LOG_TAG = "Net_log";
+    private final static String CAB_URL = "http://cab.inettel.ru/";
+    private final static String LOG_TAG = "Net_log";
 
     private Map<String, String> cookies;
 
-    public Map getCookies(String login, String password) {
+    public static Map getCookies(String login, String password) {
         Map<String, String> cookies;
         GetCookies task = new GetCookies();
         task.execute(login, password);
@@ -70,7 +70,7 @@ public class Net {
 
     ///////////////////////////////////////////////////////////////////////////////
 
-    private class GetCookies extends AsyncTask<String, Void, Map>{
+    private static class GetCookies extends AsyncTask<String, Void, Map>{
         @Override
         protected Map doInBackground (String... params) {
             Connection.Response response;
