@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 /**
  * Created by k on 23.07.14.
@@ -35,16 +34,10 @@ public class SettingsActivity extends Activity {
     public void onBtnSaveSettingsClick(View view) {
         userLogin = edLogin.getText().toString();
         userPassword = edPassword.getText().toString();
-        MainActivity.user = new User(userLogin, userPassword);
-        if (MainActivity.user.isLoginOk() == false) {
-            Toast.makeText(this, "Не верные логин/пароль", Toast.LENGTH_SHORT).show();
-        } else {
-            Intent intent = new Intent();
-            intent.putExtra("userLogin", userLogin);
-            intent.putExtra("userPassword", userPassword);
-            setResult(RESULT_OK, intent);
-            finish();
-        }
-
+        Intent intent = new Intent();
+        intent.putExtra("userLogin", userLogin);
+        intent.putExtra("userPassword", userPassword);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }

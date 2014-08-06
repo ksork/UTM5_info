@@ -17,14 +17,16 @@ public class Net {
     private final static String CAB_URL = "http://cab.inettel.ru/";
     private final static String LOG_TAG = "Net_log";
 
-    private Map<String, String> cookies;
+    private static Map<String, String> cookies = null;
+    public static boolean connectFail;
 
-    public static Map getCookies(String login, String password) {
-        Map<String, String> cookies;
+    public static Document getMainPage(String login, String password) {
+        connectFail = true;
+        Document mainHtml;
         GetCookies task = new GetCookies();
         task.execute(login, password);
         try {
-            cookies = task.get();
+            mainHtml = task.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
             return null;
@@ -32,10 +34,12 @@ public class Net {
             e.printStackTrace();
             return null;
         }
-        return cookies;
+        if (connectFail) return null;
+        if(mainHtml.select("table").isEmpty()) return null;
+        return mainHtml;
     }
 
-    public Document getRequest(String url){
+    public static Document getRequest(String url){
         Document html;
         GetRequest task = new GetRequest();
         task.execute(CAB_URL + url);
@@ -51,7 +55,7 @@ public class Net {
         return html;
     }
 
-    public Document postRequest(String url, Map<String, String> postData){
+    public static Document postRequest(String url, Map<String, String> postData){
         Document html;
         url = CAB_URL + url;
         PostRequest task = new PostRequest();
@@ -70,44 +74,48 @@ public class Net {
 
     ///////////////////////////////////////////////////////////////////////////////
 
-    private static class GetCookies extends AsyncTask<String, Void, Map>{
+    private static class GetCookies extends AsyncTask<String, Void, Document>{
         @Override
-        protected Map doInBackground (String... params) {
+        protected Document doInBackground (String... params) {
             Connection.Response response;
+            Document html = null;
             try {
                 response = Jsoup.connect(CAB_URL)
                         .data("bootstrap[username]", params[0])
                         .data("bootstrap[password]", params[1])
                         .method(Connection.Method.POST).execute();
+                html = response.parse();
             } catch (IOException e) {
-                Log.d(LOG_TAG, "cookies get error");
+                Log.d(LOG_TAG, "Login error");
+                Net.cookies = null;
                 return null;
             }
-            Map cookies = response.cookies();
-            return cookies;
+            Net.cookies = response.cookies();
+            connectFail = false;
+            return html;
         }
     }
 
-    private class GetRequest extends AsyncTask<String, Void, Document>{
+    private static class GetRequest extends AsyncTask<String, Void, Document>{
         @Override
         protected Document doInBackground(String... url) {
             Document html;
             try {
                 html = Jsoup.connect(url[0]).cookies(cookies).get();
             } catch (IOException e) {
-                Log.d(LOG_TAG, "GET error");;
+                Log.d(LOG_TAG, "GET error");
                 return null;
             }
             return html;
         }
     }
 
-    private class PostRequest extends AsyncTask<Object, Void, Document>{
+    private static class PostRequest extends AsyncTask<Object, Void, Document>{
         @Override
         protected Document doInBackground(Object... params) {
             Document html;
             String url = (String) params[0];
-            Map postData = (Map) params[1];
+            Map<String, String> postData = (Map) params[1];
             try {
                 html = Jsoup.connect(url)
                         .data(postData)

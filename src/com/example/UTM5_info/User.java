@@ -24,8 +24,6 @@ public class User {
     private String userLogin;
     private String userPassword;
     private Document mainHtml;
-    //private boolean syncInProgress = false;
-
 
     // Конструктор
     public User(String userLogin, String userPassword) {
@@ -34,10 +32,14 @@ public class User {
         this.refreshMainHtml();
     }
 
+    // Логинимся на сайт, получаем главную старничку кабинета
+    public void refreshMainHtml() {
+        mainHtml = Net.getMainPage(userLogin, userPassword);
+    }
+
     // Проверка коректности логина/пароля
     public boolean isLoginOk() {
-        String data = mainHtml.select("table").text();
-        return data.length() != 0;
+        return (mainHtml != null);
     }
 
     // Лицевой счет
@@ -78,24 +80,17 @@ public class User {
 
     // Берем кредит если возможно, или возвращаем дату последнего кредита
     public String addCredit() {
-        String result;
-        CreditAdder creditAdder = new CreditAdder();
-        creditAdder.execute();
-        try {
-            result = creditAdder.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            result = null;
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-            result = null;
+        Map<String, String> addCreditData = new HashMap<String, String>();
+        addCreditData.put("credit_sum", "500");
+        addCreditData.put("accepted", "1");
+        Document creditPossibility = Net.getRequest("user/promise-payment/");
+        // Форма отсутствует, возвращаем дату последнего платежа
+        if (creditPossibility.select("form").isEmpty()){
+            return grabTable(creditPossibility, 0, 1).split(" ")[0];
         }
-        return result;
-    }
-
-    // Логинимся на сайт, получаем главную старничку кабинета
-    public void refreshMainHtml() {
-        Net.getCookies(userLogin, userPassword);
+        Net.postRequest("user/promise-payment/", addCreditData);
+        Net.getRequest("user/change-status/int_status/1/");
+        return null;
     }
 
     // Список доступных тарифов
@@ -163,38 +158,6 @@ public class User {
         }
     }
 
-    // Кредит
-    class CreditAdder extends AsyncTask<Void, Void, String> {
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            try { // Логинимся в кабинет, сохраняем куки
-                Connection.Response res = Jsoup.connect(CAB_URL)
-                        .data("bootstrap[username]", userLogin)
-                        .data("bootstrap[password]", userPassword)
-                        .method(Connection.Method.POST).execute();
-                Map<String, String> sessionId = res.cookies();
-                // Переход на страничку кредита
-                Document doc = Jsoup.connect(CAB_URL + "/user/promise-payment/aid/" + getAccountId())
-                        .cookies(sessionId).get();
-                if (doc.select("form").text().length() == 0) {
-                    return grabTable(doc, 0, 1).split(" ")[0];
-                } else {
-                    // Берём кредит
-                    Jsoup.connect(CAB_URL + "/user/promise-payment/aid/" + getAccountId())
-                            .data("credit_sum", "500")
-                            .data("accepted", "1")
-                            .cookies(sessionId).post();
-                    // Вкл. интернет
-                    Jsoup.connect(CAB_URL + "/user/change-status/int_status/1/aid/" + getAccountId())
-                            .cookies(sessionId).get();
-                }
-            } catch (IOException e) {
-            }
-            return null;
-        }
-
-    }
 
     // Список доступных тарифов
     class GetTariffList extends AsyncTask<Void, Void, Document> {

@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static com.example.UTM5_info.Checker.cabUnAvailable;
 import static com.example.UTM5_info.Dialog.showMessage;
@@ -65,9 +67,8 @@ public class MainActivity extends Activity {
                 case REQUEST_CODE_SETTINGS: // Возврат из settings_activity
                     userLogin = data.getStringExtra("userLogin");
                     userPassword = data.getStringExtra("userPassword");
-                    user = new User(userLogin, userPassword);
-                    saveAccountData();
-                    refreshData();
+                    if (refreshData()) saveAccountData();
+                    else loadAccountData();
                     break;
                 case REQUEST_CODE_TARIFFS:
                     user = new User(userLogin, userPassword);
@@ -114,32 +115,23 @@ public class MainActivity extends Activity {
     }
 
     // Получаем данные с сайта, выводим на экран
-    protected void refreshData() {
-        if (cabUnAvailable(CONTEXT)) { //нет связи
-            tvLogin.setText(userLogin);
-            tvAccountId.setText("-----");
-            tvCurrentTariff.setText("-----");
-            tvBalance.setText("0");
-            tvDaysLeft.setText("0");
-            tvDayEnding.setText("дней");
-            return;
-        }
+    protected boolean refreshData() {
         user = new User(userLogin, userPassword);
-        if (!user.isLoginOk()) {              //связь есть, но логин/пароль не верны
-            tvLogin.setText(userLogin);
-            tvAccountId.setText("-----");
-            tvCurrentTariff.setText("-----");
-            tvBalance.setText("0");
-            tvDaysLeft.setText("0");
-            tvDayEnding.setText("дней");
-        } else {                             //все нормально
-            tvLogin.setText(userLogin);
-            tvAccountId.setText(user.getAccountId());
-            tvCurrentTariff.setText(user.getCurrentTariffName());
-            tvBalance.setText(user.getBalance());
-            tvDaysLeft.setText(user.getDaysLeft());
-            tvDayEnding.setText(Day.getNumEnding(user.getDaysLeft()));
+        if (Net.connectFail) {
+            Toast.makeText(this, "Нет связи с сервером", Toast.LENGTH_SHORT).show();
+            return false;
         }
+        if (!user.isLoginOk()) {
+            Toast.makeText(this, "Не верные логин/пароль", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        tvLogin.setText(userLogin);
+        tvAccountId.setText(user.getAccountId());
+        tvCurrentTariff.setText(user.getCurrentTariffName());
+        tvBalance.setText(user.getBalance());
+        tvDaysLeft.setText(user.getDaysLeft());
+        tvDayEnding.setText(Day.getNumEnding(user.getDaysLeft()));
+        return true;
     }
 
     // Кнопка настройки
@@ -178,10 +170,11 @@ public class MainActivity extends Activity {
     // Кнопка "Взять кредит"
     public void onBtnAddCreditClick(View v) {
         disableButtons();
-        if (Checker.cabUnAvailable(CONTEXT) || !user.isLoginOk()) {
+        if (!refreshData()){
             enableButtons();
             return;
         }
+
         if (Integer.parseInt(user.getBalance()) > 0) {
             showMessage(CONTEXT, "Кредит", "Услуга доступна при отрицательном балансе");
             enableButtons();
@@ -195,5 +188,12 @@ public class MainActivity extends Activity {
         }
         showMessage(CONTEXT, "Кредит", "Вы использовали кредит " + resultOfCredit + ", услуга доступна раз в 30 дней");
         enableButtons();
+    }
+
+    public void gotoSite(View v){
+        String url = "http://inettel.ru";
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        startActivity(intent);
     }
 }
