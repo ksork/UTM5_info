@@ -72,15 +72,15 @@ public class MainActivity extends Activity {
                     break;
                 case REQUEST_CODE_TARIFFS:
                     refreshData();
-                    if (resultCode == RESULT_OK) showMessage(this, "Смена тарифа", "Тариф будет изменен на " +
-                                                                    user.getNextTariffName()+" в 24:00");
+                    showMessage(this, "Смена тарифа", "Тариф будет изменен на " +
+                                       user.getNextTariffName()+" в 24:00");
                     break;
                 case REQUEST_CODE_ADD_BLOCK:
                     break;
                 case REQUEST_CODE_GOTO_SITE:
                     break;
             }
-        }
+        }else refreshData();
     }
 
     // Загрузка ранее сохраненных логина/пароля

@@ -1,18 +1,13 @@
 package com.example.UTM5_info;
 
-import android.os.AsyncTask;
 import android.util.Log;
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by k on 25.07.14.
@@ -103,7 +98,6 @@ public class User {
             HashMap<String, String> tariff = new HashMap<String, String>();
             String tariffName = tariffLabels.get(i).select("span").text();
             String tariffDescription = tariffLabels.get(i).text().split(" ", 4)[3];
-            Log.d(LOG_TAG, tariffLabels.get(i).text());
             String tariffPrice = tariffData.get(i + 1).select("td").get(3).text();
             tariff.put("tariffName", tariffName);
             tariff.put("tariffDescription", tariffPrice + " " + tariffDescription);
