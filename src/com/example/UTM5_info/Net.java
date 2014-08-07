@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutionException;
  * Created by k on 06.08.14.
  */
 public class Net {
-    private final static String CAB_URL = "http://cab.inettel.ru/";
+    public final static String CAB_URL = "http://cab.inettel.ru/";
     private final static String LOG_TAG = "Net_log";
 
     private static Map<String, String> cookies = null;

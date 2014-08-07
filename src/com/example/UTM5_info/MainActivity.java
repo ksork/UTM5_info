@@ -71,8 +71,9 @@ public class MainActivity extends Activity {
                     else loadAccountData();
                     break;
                 case REQUEST_CODE_TARIFFS:
-                    user = new User(userLogin, userPassword);
                     refreshData();
+                    if (resultCode == RESULT_OK) showMessage(this, "Смена тарифа", "Тариф будет изменен на " +
+                                                                    user.getNextTariffName()+" в 24:00");
                     break;
                 case REQUEST_CODE_ADD_BLOCK:
                     break;
@@ -146,7 +147,7 @@ public class MainActivity extends Activity {
     // Кнопка "Сменить тариф"
     public void onBtnChangeTariffClick(View v) {
         disableButtons();
-        if (Checker.cabUnAvailable(CONTEXT) || !user.isLoginOk()) {
+        if (!refreshData()) {
             enableButtons();
             return;
         }

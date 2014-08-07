@@ -55,12 +55,12 @@ public class TariffsActivity extends Activity{
     public void onBtnOkClick(View v){
         // Проверяем соединение с кабинетом
         if (Checker.cabUnAvailable(context)){
+            setResult(1);
             return;
         }
         int tariffSelected = lvTariffs.getCheckedItemPosition();
         if (tariffSelected == -1){return;}
         // Проверяем баланс
-        Log.d(LOG_TAG, "balance: " + isBalanceLow(tariffSelected));
         if (isBalanceLow(tariffSelected)){
             Dialog.showMessage(TariffsActivity.this, "Недостаточно денег !", "Для перехода на выбраный тариф " +
                     "необходим баланс более " + TARIFFS_PRICE[tariffSelected] + "руб.");

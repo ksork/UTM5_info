@@ -20,7 +20,7 @@ public class Checker {
         } catch (InterruptedException e) {
         } catch (ExecutionException e) {
         }
-        Toast.makeText(context, "Сервис недоступен", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Нет связи с сервером", Toast.LENGTH_SHORT).show();
         return true;
     }
 
@@ -29,7 +29,7 @@ public class Checker {
         @Override
         protected Boolean doInBackground(Void... params) {
             try {
-                Jsoup.connect(User.CAB_URL).get();
+                Jsoup.connect(Net.CAB_URL).get();
                 return true;
             } catch (IOException e) {
                 return false;

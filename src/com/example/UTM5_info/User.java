@@ -19,7 +19,6 @@ import java.util.concurrent.ExecutionException;
  */
 public class User {
     private final String LOG_TAG = "User_log";
-    public final static String CAB_URL = "http://cab.inettel.ru";
     private final String IMG_CHECKED = String.valueOf(R.drawable.galochka64x64);
     private String userLogin;
     private String userPassword;
@@ -95,42 +94,36 @@ public class User {
 
     // Список доступных тарифов
     public ArrayList<HashMap<String, String>> getTariffList() {
-        GetTariffList task = new GetTariffList();
-        task.execute();
         ArrayList<HashMap<String, String>> tariffList = new ArrayList<HashMap<String, String>>();
-        try {
-            Document tariffHtml = task.get();
-            Elements tariffLabels = tariffHtml.select("label");
-            Elements tariffData = tariffHtml.select("table");
+        Document tariffHtml = Net.getRequest("user/change-tariff/");
+        Elements tariffLabels = tariffHtml.select("label");
+        Elements tariffData = tariffHtml.select("table");
 
-            for (int i = 0; i < tariffLabels.size() - 1; i++) {
-                HashMap<String, String> tariff = new HashMap<String, String>();
-                String tariffName = tariffLabels.get(i).select("span").text();
-                String tariffDescription = tariffLabels.get(i).text().split(" ", 4)[3];
-                Log.d(LOG_TAG, tariffLabels.get(i).text());
-                String tariffPrice = tariffData.get(i + 1).select("td").get(3).text();
-                tariff.put("tariffName", tariffName);
-                tariff.put("tariffDescription", tariffPrice+" "+tariffDescription);
+        for (int i = 0; i < tariffLabels.size() - 1; i++) {
+            HashMap<String, String> tariff = new HashMap<String, String>();
+            String tariffName = tariffLabels.get(i).select("span").text();
+            String tariffDescription = tariffLabels.get(i).text().split(" ", 4)[3];
+            Log.d(LOG_TAG, tariffLabels.get(i).text());
+            String tariffPrice = tariffData.get(i + 1).select("td").get(3).text();
+            tariff.put("tariffName", tariffName);
+            tariff.put("tariffDescription", tariffPrice + " " + tariffDescription);
 
-                if (tariffName.equals(getCurrentTariffName())) {
-                    tariff.put("tariffEnable", IMG_CHECKED);
-                } else {
-                    tariff.put("tariffEnable", null);
-                }
-                tariffList.add(tariff);
+            if (tariffName.equals(getCurrentTariffName())) {
+                tariff.put("tariffEnable", IMG_CHECKED);
+            } else {
+                tariff.put("tariffEnable", null);
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+            tariffList.add(tariff);
         }
         return tariffList;
     }
 
     // Смена тарифа
     public void changeTariff(String nextTariffId) {
-        ChangeTariff task = new ChangeTariff();
-        task.execute(nextTariffId);
+        Map<String, String> changeTariffData = new HashMap<String, String>();
+        changeTariffData.put("next_tp", nextTariffId);
+        changeTariffData.put("accepted", "1");
+        Net.postRequest("user/change-tariff/", changeTariffData);
     }
 
     // Парсер таблиц
@@ -138,67 +131,5 @@ public class User {
         Element rowData = html.select("tr").get(row);
         Element columnData = rowData.select("td").get(column);
         return columnData.text();
-    }
-
-    // Логинимся на сайт, получаем главную старничку кабинета
-    class MainHtmlRefresher extends AsyncTask<Void, Void, Document> {
-
-        @Override
-        protected Document doInBackground(Void... voids) {
-            Document html;
-            try {
-                html = Jsoup.connect(CAB_URL)
-                        .data("bootstrap[username]", userLogin)
-                        .data("bootstrap[password]", userPassword)
-                        .post();
-            } catch (IOException e) {
-                return null;
-            }
-            return html;
-        }
-    }
-
-
-    // Список доступных тарифов
-    class GetTariffList extends AsyncTask<Void, Void, Document> {
-
-        @Override
-        protected Document doInBackground(Void... params) {
-            try { // Логинимся в кабинет, сохраняем куки
-                Connection.Response res = Jsoup.connect(CAB_URL)
-                        .data("bootstrap[username]", userLogin)
-                        .data("bootstrap[password]", userPassword)
-                        .method(Connection.Method.POST).execute();
-                Map<String, String> sessionId = res.cookies();
-                // Переход на страничку смены тарифа
-                return Jsoup.connect(CAB_URL + "/user/change-tariff/").cookies(sessionId).get();
-            } catch (IOException e) {
-                return null;
-            }
-        }
-    }
-
-    // Смена тарифа
-    class ChangeTariff extends AsyncTask<String, Void, Void> {
-
-        @Override
-        protected Void doInBackground(String... nextTariff) {
-            try { // Логинимся в кабинет, сохраняем куки
-                Connection.Response res = Jsoup.connect(CAB_URL)
-                        .data("bootstrap[username]", userLogin)
-                        .data("bootstrap[password]", userPassword)
-                        .method(Connection.Method.POST).execute();
-                Map<String, String> sessionId = res.cookies();
-                // Переход на страничку смены тарифа
-                Jsoup.connect(CAB_URL + "/user/change-tariff/")
-                        .data("next_tp", nextTariff[0])
-                        .data("accepted", "1")
-                        .cookies(sessionId)
-                        .method(Connection.Method.POST).execute();
-                return null;
-            } catch (IOException e) {
-                return null;
-            }
-        }
     }
 }

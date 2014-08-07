@@ -84,7 +84,7 @@
             android:layout_height="188dp"
             android:text="Настройки"
             android:id="@+id/btnSettings" android:layout_alignParentBottom="true" android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp" android:layout_marginBottom="20dp" style="@style/button"
+            android:layout_marginRight="20dp" android:layout_marginBottom="20dp" style="@style/buttonL"
             android:onClick="onBtnSettingsClick"/>
     <Button
             android:layout_width="188dp"
