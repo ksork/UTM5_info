@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">UTM5_info</string>
-    <string name="tariff_info">Стоимость перехода на любой\nтарифный план - 100руб.\nСмена тарифа происходит в 24:00</string>
+    <string name="tariff_info">Стоимость перехода на любой\nтарифный план - 50руб.
+        \nСмена тарифа происходит в 24:00 текущего дня</string>
 </resources>

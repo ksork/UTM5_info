@@ -4,41 +4,191 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/backh">
+        xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/backv">
 
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView" android:background="@drawable/inettel" android:layout_alignParentLeft="true"
-            android:layout_marginLeft="0dp" android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
-    <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/lvTariffs"
-            android:layout_weight="1"
-            android:layout_marginLeft="10dp" android:layout_marginRight="10dp"
-            android:layout_alignParentLeft="false"
-            android:layout_below="@+id/imageView"
-            android:choiceMode="singleChoice" android:layout_marginBottom="5dp"/>
+            android:id="@+id/imageView" android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" android:background="@drawable/inettel"
+            android:layout_marginLeft="10dp"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" android:id="@+id/llTariffGroup1"
+            android:layout_above="@+id/llTarifGroup2" android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" android:layout_marginBottom="10dp">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:id="@+id/llTariff1" android:layout_above="@+id/llTariff2"
+                android:layout_weight="1" android:layout_marginRight="5dp">
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:layout_weight="1">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Комфорт+"
+                        android:id="@+id/tvTariffName1" style="@style/text1L"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="скорость до 20мб/с"
+                        android:id="@+id/tvTariffSpeed1" style="@style/text2L"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="400 рублей за 30 дней"
+                        android:id="@+id/tvTariffPrice1" style="@style/text2L"/>
+            </LinearLayout>
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cbTariff1" android:checked="false"
+                    android:enabled="true" android:button="@drawable/check_box64x64"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button" android:id="@+id/llTariff2"
+                android:layout_centerVertical="true"
+                android:layout_above="@+id/llTariff3" android:layout_weight="1" android:layout_marginLeft="5dp">
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:layout_weight="1">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Оптима+"
+                        android:id="@+id/tvTariffName2" style="@style/text1L"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="скорость до 40мб/с"
+                        android:id="@+id/tvTariffSpeed2" style="@style/text2L"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="500 рублей за 30 дней"
+                        android:id="@+id/tvTariffPrice2" style="@style/text2L"/>
+            </LinearLayout>
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cbTariff2" android:checked="false"
+                    android:enabled="true" android:button="@drawable/check_box64x64"/>
+        </LinearLayout>
+    </LinearLayout>
+
 
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" android:layout_alignParentLeft="false" android:layout_marginLeft="10dp"
-            android:layout_alignParentTop="false"
-            android:layout_marginRight="10dp" android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp" android:id="@+id/linearLayout" android:layout_below="@+id/lvTariffs">
+            android:layout_height="wrap_content" android:id="@+id/llTarifGroup2" android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp" android:layout_marginRight="10dp">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button" android:id="@+id/llTariff3"
+                android:layout_centerVertical="true"
+                android:layout_weight="1" android:layout_marginRight="5dp">
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:layout_weight="1">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Актив+"
+                        android:id="@+id/tvTariffName3" style="@style/text1L"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="скорость до 75мб/с"
+                        android:id="@+id/tvTariffSpeed3" style="@style/text2L"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="600 рублей за 30 дней"
+                        android:id="@+id/tvTariffPrice3" style="@style/text2L"/>
+            </LinearLayout>
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cbTariff3" android:checked="false"
+                    android:enabled="true" android:button="@drawable/check_box64x64"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button" android:id="@+id/llTariff4"
+                android:layout_centerVertical="true" android:layout_below="@+id/llTariff3"
+                android:layout_weight="1" android:layout_marginLeft="5dp">
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:layout_weight="1">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Лидер+"
+                        android:id="@+id/tvTariffName4" style="@style/text1L"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="скорость не ограничена"
+                        android:id="@+id/tvTariffSpeed4" style="@style/text2L"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="800 рублей за 30 дней"
+                        android:id="@+id/tvTariffPrice34" style="@style/text2L"/>
+            </LinearLayout>
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cbTariff4" android:checked="false"
+                    android:enabled="true" android:button="@drawable/check_box64x64"/>
+        </LinearLayout>
+    </LinearLayout>
+    <Button
+            android:layout_width="188dp"
+            android:layout_height="188dp"
+            android:text="Изменить\nтариф"
+            android:id="@+id/btnChangeTariff"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:layout_alignParentRight="true" android:layout_alignParentEnd="false"
+            android:layout_marginRight="10dp"
+            style="@style/buttonL" android:layout_below="@+id/llTarifGroup2" android:layout_marginBottom="0dp"
+            android:layout_marginTop="10dp"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" android:id="@+id/llTariffInfo"
+            android:background="@drawable/button"
+            android:layout_below="@+id/llTarifGroup2" android:layout_toLeftOf="@+id/btnChangeTariff"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" android:layout_marginTop="10dp"
+            android:layout_alignBottom="@+id/btnChangeTariff">
         <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Важно !"
+                android:id="@+id/textView2" style="@style/text1L"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/tariff_info"
-                android:id="@+id/textView" android:layout_weight="1" style="@style/text2L"/>
-        <Button
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:id="@+id/btnOk"
-                android:onClick="onBtnOkClick" android:text="Изменить\nтариф"
-                android:background="@drawable/button_background" style="@style/button"/>
+                android:id="@+id/textView" android:layout_above="@+id/llTariff1"
+                style="@style/text2L"/>
     </LinearLayout>
-
 </RelativeLayout>

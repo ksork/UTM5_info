@@ -33,7 +33,7 @@ public class TariffsActivity extends Activity{
         tariffData = MainActivity.user.getTariffList();
         // Меняем тарифы "Оптима" и "Актив" местами
         Collections.swap(tariffData, 1, 2);
-        showTariffs();
+        //showTariffs();
         }
 
     // Выводим список тарифов на экран
