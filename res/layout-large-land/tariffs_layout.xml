@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:id="@+id/cbTariff1" android:checked="false"
-                    android:enabled="true" android:button="@drawable/check_box64x64"/>
+                    android:enabled="true" android:button="@drawable/check_box64x64" android:onClick="onCbClick"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
@@ -82,7 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:id="@+id/cbTariff2" android:checked="false"
-                    android:enabled="true" android:button="@drawable/check_box64x64"/>
+                    android:enabled="true" android:button="@drawable/check_box64x64" android:onClick="onCbClick"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -123,7 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:id="@+id/cbTariff3" android:checked="false"
-                    android:enabled="true" android:button="@drawable/check_box64x64"/>
+                    android:enabled="true" android:button="@drawable/check_box64x64" android:onClick="onCbClick"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
@@ -156,7 +156,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:id="@+id/cbTariff4" android:checked="false"
-                    android:enabled="true" android:button="@drawable/check_box64x64"/>
+                    android:enabled="true" android:button="@drawable/check_box64x64" android:onClick="onCbClick"/>
         </LinearLayout>
     </LinearLayout>
     <Button
@@ -169,7 +169,7 @@
             android:layout_alignParentRight="true" android:layout_alignParentEnd="false"
             android:layout_marginRight="10dp"
             style="@style/buttonL" android:layout_below="@+id/llTarifGroup2" android:layout_marginBottom="0dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp" android:onClick="onBtnOkClick"/>
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"

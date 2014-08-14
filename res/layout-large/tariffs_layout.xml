@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/cbTariff1" android:checked="false"
-                android:enabled="true" android:button="@drawable/check_box64x64"/>
+                android:enabled="true" android:button="@drawable/check_box64x64" android:onClick="onCbClick"/>
     </LinearLayout>
 
     <LinearLayout
@@ -95,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/cbTariff2" android:checked="false"
-                android:enabled="true" android:button="@drawable/check_box64x64"/>
+                android:enabled="true" android:button="@drawable/check_box64x64" android:onClick="onCbClick"/>
     </LinearLayout>
 
     <LinearLayout
@@ -129,7 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/cbTariff3" android:checked="false"
-                android:enabled="true" android:button="@drawable/check_box64x64"/>
+                android:enabled="true" android:button="@drawable/check_box64x64" android:onClick="onCbClick"/>
     </LinearLayout>
 
     <LinearLayout
@@ -163,7 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/cbTariff4" android:checked="false"
-                android:enabled="true" android:button="@drawable/check_box64x64"/>
+                android:enabled="true" android:button="@drawable/check_box64x64" android:onClick="onCbClick"/>
     </LinearLayout>
     <Button
             android:layout_width="188dp"
@@ -174,5 +174,5 @@
             android:background="@drawable/button_background"
             android:layout_alignParentRight="true" android:layout_alignParentEnd="false"
             android:layout_marginRight="10dp"
-            android:layout_below="@+id/llTariff4" style="@style/buttonL"/>
+            android:layout_below="@+id/llTariff4" style="@style/buttonL" android:onClick="onBtnOkClick"/>
 </RelativeLayout>
